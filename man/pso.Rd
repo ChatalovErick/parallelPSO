@@ -6,7 +6,12 @@
   Minimization of a fitness function using PSO. The algorithm can be run sequentially or in parallel.}
 
 \usage{
-pso(fitness_function, number_parameters, number_of_partiples, max_number_iterations, W.1 = 0.9, W.2 = 0.4, C.1i = 0.5 + log(2), C.1f = 0.5 + log(2), C.2i = 0.5 + log(2), C.2f = 0.5 + log(2), K = 3, parameters_bounds = cbind(rep(-1, number_parameters), rep(1, number_parameters)), Vmax, trace = TRUE, parallel = FALSE, ...)
+pso(fitness_function, number_parameters, number_of_partiples,
+max_number_iterations, W.1 = 0.9, W.2 = 0.4,
+C.1i = 0.5 + log(2), C.1f = 0.5 + log(2),
+C.2i = 0.5 + log(2), C.2f = 0.5 + log(2),
+K = 3, parameters_bounds = cbind(rep(-1, number_parameters),
+rep(1, number_parameters)), Vmax, trace = TRUE, parallel = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
