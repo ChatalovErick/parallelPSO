@@ -33,30 +33,25 @@ rep(1, number_parameters)), Vmax, trace = TRUE, parallel = FALSE, ...)
 \item{W}{
   The exploitation constant. Inertia
 
-  \item{W.1}
-    Initial value of the inertia weight Defaults to 0.9.
+  \item W.1, Initial value of the inertia weight Defaults to 0.9.
   
-  \item{W.2}
-    Final value of the inertia weight Defaults to 0.4.
+  \item W.2, Final value of the inertia weight Defaults to 0.4.
   
 
 }
 \item{C.1}{
   The local exploration constant. Defaults to \code{.5+log(2)}.
-  \item{C.1i}
-    Initial value of the C.1.
+  \item C.1i ,Initial value of the C.1.
   
-    \item{C.1f}
-    Final value of the C.1.
+  \item C.1f ,Final value of the C.1.
   
 }
 \item{C.2}{
   The global exploration constant. Defaults to \code{.5+log(2)}.
-  \item{C.2i}
-    Initial value of the C.2.
   
-  \item{C.2f}
-    Final value of the C.2.
+  \item C.2i ,Initial value of the C.2.
+  
+  \item C.2f ,Final value of the C.2.
   
 }
 
