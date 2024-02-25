@@ -64,7 +64,7 @@ rep(1, number_parameters)), Vmax, trace = TRUE, parallel = FALSE, ...)
 }
 
   \item{trace}{
-  Return the statistics collecte during the optimization.
+  Return the statistics collected during the optimization.
 }
   \item{parallel}{
   An optional argument which allows to specify if PSO should be run sequentially or in parallel
