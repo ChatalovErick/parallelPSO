@@ -32,11 +32,11 @@ rep(1, number_parameters)), Vmax, trace = TRUE, parallel = FALSE, ...)
 
 \item{W}{
   The exploitation constant. Inertia
-
-  \item W.1, Initial value of the inertia weight Defaults to 0.9.
-  
-  \item W.2, Final value of the inertia weight Defaults to 0.4.
-  
+  \itemize{
+    \item W.1, Initial value of the inertia weight Defaults to 0.9.
+    
+    \item W.2, Final value of the inertia weight Defaults to 0.4.
+  }
 
 }
 \item{C.1}{
