@@ -60,7 +60,7 @@ rep(1, number_parameters)), Vmax, trace = TRUE, parallel = FALSE, ...)
   The exponent for calculating number of informants. Defaults to \code{3}
 }
   \item{parameters_bounds}{
-%%     ~~Describe \code{parameters_bounds} here~~
+   Upper on Lower bounds for the parameters.
 }
 
   \item{trace}{
