@@ -41,18 +41,19 @@ rep(1, number_parameters)), Vmax, trace = TRUE, parallel = FALSE, ...)
 }
 \item{C.1}{
   The local exploration constant. Defaults to \code{.5+log(2)}.
-  \item C.1i ,Initial value of the C.1.
-  
-  \item C.1f ,Final value of the C.1.
-  
+  \itemize{
+    \item C.1i ,Initial value of the C.1.
+    
+    \item C.1f ,Final value of the C.1.
+  }
 }
 \item{C.2}{
   The global exploration constant. Defaults to \code{.5+log(2)}.
-  
-  \item C.2i ,Initial value of the C.2.
-  
-  \item C.2f ,Final value of the C.2.
-  
+  \itemize{
+    \item C.2i ,Initial value of the C.2.
+    
+    \item C.2f ,Final value of the C.2.
+  }
 }
 
   \item{K}{
