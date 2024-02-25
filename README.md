@@ -1,4 +1,4 @@
-#parallelPSO
+# parallelPSO
 
 an R package for stochastic Optimisation  using the PSO. Users can easily define their own objective function depending on the problem at hand. Several genetic operators are available and can be combined to explore the best settings for the current task. PSO can be run sequentially or in parallel, using the doParallel package. 
 
