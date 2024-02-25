@@ -1,7 +1,8 @@
 pso <- function(fitness_function,number_parameters,number_of_partiples,max_number_iterations,
-                W=1/(2*log(2)),C.1 = .5+log(2),C.2 = .5+log(2),parameters_bounds = cbind(rep(-1,number_parameters),rep(1,number_parameters)),
+                W.1 = 0.9,W.2 = 0.4,C.1i = .5+log(2),C.1f = .5+log(2),
+                C.2i = .5+log(2),C.2f = .5+log(2),K=3,
+                parameters_bounds = cbind(rep(-1,number_parameters),rep(1,number_parameters)),
                 Vmax,trace=TRUE,parallel=FALSE, ...) {
-  
   
   callargs <- list(...)
 
@@ -9,10 +10,13 @@ pso <- function(fitness_function,number_parameters,number_of_partiples,max_numbe
     return(matrix(runif(n*m,0,1),nrow=n,ncol=m)*(upper-lower)+lower)
   }
   
-  # parameters intervals.
+  # parameters intervals. 
   lower = as.double(parameters_bounds[,1],number_parameters)
   upper = as.double(parameters_bounds[,2],number_parameters)
   
+  # % of informants. based in https://github.com/cran/pso.git. neighborhood method !?
+  p.p <- 1-(1-1/number_parameters)^K
+
   # Start parallel computing (if needed)
   if(is.logical(parallel))
     { if(parallel) 
@@ -74,20 +78,66 @@ pso <- function(fitness_function,number_parameters,number_of_partiples,max_numbe
   
   # iterations 
   stats.iter <- 1
+  iter <- 1
   while(stats.iter<max_number_iterations) {
     
-    stats.iter <- stats.iter+1 
+    # Calculate the W, inertia. 
+    if (W.1 == W.2){
+      # fixed inertia 
+      W = W.1
+    } else {
+      # acceleration over time for the inertia 
+      W = W.2 + (W.1 - W.2) * (((max_number_iterations-1) - stats.iter)/(max_number_iterations-1))
+    }
 
-    # velocity
-    V <- W*V + runif(number_parameters,0,C.2)*(-sweep(X,1,P.best,"-")) + runif(number_parameters,0,C.1)*(P-X)
-      
+    # Calculate the C.1
+    if (C.1i == C.1f){
+      # fixed C.1
+      C.1 = C.1i
+    } else {
+      # acceleration over time for the C.1 
+      C.1 =  C.1i + (C.1f - C.1i) * (stats.iter/(max_number_iterations-1))
+    }
+
+    # Calculate the C.2
+    if (C.2i == C.2f){
+      # fixed C.2
+      C.2 = C.2i
+    } else {
+      # acceleration over time for the C.2 
+      C.2 =  C.2i + (C.2f - C.2i) * (stats.iter/(max_number_iterations-1))
+    }
+    # iterations for the while loop.
+    stats.iter <- stats.iter+1 
+    
+    # Calculate the velocity
+    # make a neighborhood for the pso based in https://github.com/cran/pso.git 
+
+    if(K != 0){
+      neighborhood <- matrix(runif(number_of_partiples*number_of_partiples,0,1) <= p.p,number_of_partiples,
+      number_of_partiples)
+      diag(neighborhood) <- TRUE
+
+      for(i in 1:number_of_partiples){
+        
+        j <- which(neighborhood[,i])[which.min(f.p[neighborhood[,i]])] # best informant
+
+        # velocity
+        V[,i] <- W*V[,i] + runif(number_parameters,0,C.2)*(P[,i]-X[,i])
+        if (i != j){ V[,i] <- V[,i]+runif(number_parameters,0,C.1)*(P[,j]-X[,i]) }
+      }
+
+    } else {
+      # velocity
+      V <- W*V + runif(number_parameters,0,C.2)*(-sweep(X,1,P.best,"-")) + runif(number_parameters,0,C.1)*(P-X)
+    }
+
     # new positions 
     X <- X+V
     
     ## check bounds ##
     ##################
     for(i in 1:number_of_partiples){
-      
       temp <- X[,i]<lower
       if (any(temp)) {
         X[temp,i] <- lower[temp]
@@ -109,7 +159,7 @@ pso <- function(fitness_function,number_parameters,number_of_partiples,max_numbe
       # loop for the particles 
       for(i in 1:number_of_partiples){
         # evaluate function
-        f.x[i] <- do.call(fitness_function,c(list(X[,i.]),callargs)) 
+        f.x[i] <- do.call(fitness_function,c(list(X[,i]),callargs)) 
       }
     } else {
       
