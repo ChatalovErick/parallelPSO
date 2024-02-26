@@ -6,7 +6,12 @@
   Minimization of a fitness function using PSO. The algorithm can be run sequentially or in parallel.}
 
 \usage{
-pso(fitness_function, number_parameters, number_of_partiples, max_number_iterations, W.1 = 0.9, W.2 = 0.4, C.1i = 0.5 + log(2), C.1f = 0.5 + log(2), C.2i = 0.5 + log(2), C.2f = 0.5 + log(2), K = 3, parameters_bounds = cbind(rep(-1, number_parameters), rep(1, number_parameters)), Vmax, trace = TRUE, parallel = FALSE, ...)
+pso(fitness_function, number_parameters, number_of_partiples,
+max_number_iterations, W.1 = 0.9, W.2 = 0.4,
+C.1i = 0.5 + log(2), C.1f = 0.5 + log(2),
+C.2i = 0.5 + log(2), C.2f = 0.5 + log(2),
+K = 3, parameters_bounds = cbind(rep(-1, number_parameters),
+rep(1, number_parameters)), Vmax, trace = TRUE, parallel = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -27,31 +32,27 @@ pso(fitness_function, number_parameters, number_of_partiples, max_number_iterati
 
 \item{W}{
   The exploitation constant. Inertia
-
-  \item{W.1}{
-    Initial value of the inertia weight Defaults to 0.9.
-  }
-  \item{W.2}{
-    Final value of the inertia weight Defaults to 0.4.
+  \itemize{
+    \item W.1, Initial value of the inertia weight Defaults to 0.9.
+    
+    \item W.2, Final value of the inertia weight Defaults to 0.4.
   }
 
 }
 \item{C.1}{
   The local exploration constant. Defaults to \code{.5+log(2)}.
-  \item{C.1i}{
-    Initial value of the C.1.
-  }
-    \item{C.1f}{
-    Final value of the C.1.
+  \itemize{
+    \item C.1i ,Initial value of the C.1.
+    
+    \item C.1f ,Final value of the C.1.
   }
 }
 \item{C.2}{
   The global exploration constant. Defaults to \code{.5+log(2)}.
-  \item{C.2i}{
-    Initial value of the C.2.
-  }
-  \item{C.2f}{
-    Final value of the C.2.
+  \itemize{
+    \item C.2i ,Initial value of the C.2.
+    
+    \item C.2f ,Final value of the C.2.
   }
 }
 
@@ -59,11 +60,11 @@ pso(fitness_function, number_parameters, number_of_partiples, max_number_iterati
   The exponent for calculating number of informants. Defaults to \code{3}
 }
   \item{parameters_bounds}{
-%%     ~~Describe \code{parameters_bounds} here~~
+   Upper on Lower bounds for the parameters.
 }
 
   \item{trace}{
-  Return the statistics collecte during the optimization.
+  Return the statistics collected during the optimization.
 }
   \item{parallel}{
   An optional argument which allows to specify if PSO should be run sequentially or in parallel
