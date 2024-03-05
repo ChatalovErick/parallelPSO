@@ -2,7 +2,7 @@ pso <- function(fitness_function,number_parameters,number_of_partiples,max_numbe
                 W.1 = 0.9,W.2 = 0.4,C.1i = .5+log(2),C.1f = .5+log(2),
                 C.2i = .5+log(2),C.2f = .5+log(2),K=3,
                 parameters_bounds = cbind(rep(-1,number_parameters),rep(1,number_parameters)),
-                Vmax,trace=TRUE,parallel=FALSE, ...) {
+                Vmax=NULL,trace=TRUE,parallel=FALSE, ...) {
   
   callargs <- list(...)
 
@@ -18,24 +18,9 @@ pso <- function(fitness_function,number_parameters,number_of_partiples,max_numbe
   p.p <- 1-(1-1/number_parameters)^K
 
   # Start parallel computing (if needed)
-  if(is.logical(parallel))
-    { if(parallel) 
-      { parallel <- startParallel(parallel)
-        stopCluster <- TRUE }
-      else
-      { parallel <- stopCluster <- FALSE } 
+  if(is.logical(parallel)){
+    registerDoParallel(parallel)
   }
-  else
-    { stopCluster <- if(inherits(parallel, "cluster")) FALSE else TRUE
-      parallel <- startParallel(parallel) 
-    }
-  on.exit(if(parallel & stopCluster)
-    stopParallel(attr(parallel, "cluster")) )
-  # define operator to use depending on parallel being TRUE or FALSE
-  `%DO%` <- if(parallel && requireNamespace("doRNG", quietly = TRUE)) 
-                            doRNG::`%dorng%`
-            else if(parallel) `%dopar%` else `%do%`
-  
   
   # Initialization
   ### initial particles
@@ -52,12 +37,12 @@ pso <- function(fitness_function,number_parameters,number_of_partiples,max_numbe
   }
 
   # first evaluations and initial population
-  if(!(parallel)){
+  if(is.logical(parallel)){
     f.x <- apply(X,2,function(x){ do.call(fitness_function,c(list(x),callargs)) }) # first evaluations  
   } else {
     print("going parallel")
     f.x <- rep(NA, number_of_partiples)
-    f.x <- foreach(i = seq_len(number_of_partiples), .combine= "c") %DO%
+    f.x <- foreach(i = seq_len(number_of_partiples), .combine= c) %dopar%
       {
         do.call(fitness_function,c(list(X[,i]),callargs)) 
       }
@@ -155,7 +140,7 @@ pso <- function(fitness_function,number_parameters,number_of_partiples,max_numbe
     #### functions evaluations ####
     ###############################
     
-    if (!(parallel)){
+    if (is.logical(parallel)){
       # loop for the particles 
       for(i in 1:number_of_partiples){
         # evaluate function
@@ -164,7 +149,7 @@ pso <- function(fitness_function,number_parameters,number_of_partiples,max_numbe
     } else {
       
       f.x <- rep(NA, number_of_partiples)
-      f.x <- foreach(i= seq_len(number_of_partiples),.combine= "c") %DO% {
+      f.x <- foreach(i= seq_len(number_of_partiples),.combine= c) %dopar% {
         do.call(fitness_function,c(list(X[,i]),callargs)) 
       }
       
