@@ -155,7 +155,7 @@ pso <- function(fitness_function, number_parameters, number_of_partiples, max_nu
       do.call(fitness_function, c(list(x), callargs))
     }) # first evaluations  
   } else {
-    message("Running in parallel mode with ", parallel::getDoParWorkers(), " workers")
+    message("Running in parallel mode with ", doParallel::getDoParWorkers(), " workers")
     f.x <- foreach::foreach(i = seq_len(number_of_partiples), .combine = c) %DO% {
       do.call(fitness_function, c(list(X[, i]), callargs))
     }
