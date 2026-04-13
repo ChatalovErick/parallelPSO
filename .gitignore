@@ -1,4 +1,22 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
+```
+# R build artifacts
+*.Rd
+R/sysdata.rda
+R/RcppExports.R
+src/*.so
+src/*.dll
+src/RcppExports.cpp
+
+# R build directory
+.Rbuildignore
+
+# Dependencies
+R/library/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
+.Rprofile
+```
