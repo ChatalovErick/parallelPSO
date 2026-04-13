@@ -1,26 +1,26 @@
 ```
-# R-specific build artifacts
-.Rproj.user/
-.Rhistory
-.Rdata
+# R-specific ignores
 *.RData
-*.rds
-*.Rds
-doc/
-libs/
+*.Rhistory
+*.Rproj.user/
+.Rproj.user/
+.Rprofile.swp
 *.so
 *.dll
-*.o
-*.tar.gz
+*.dylib
 
 # Dependencies
 renv/
+library/
 packrat/
 
-# Logs and temp files
-*.log
-*.tmp
-*.swp
+# Build artifacts
+dist/
+build/
+*.o
+*.so
+*.dll
+*.dylib
 
 # Environment
 .env
@@ -28,7 +28,12 @@ packrat/
 *.env.*
 
 # Editors
-.vscode/
-.idea/
-*.Rproj
+.Rproj.user/
+.Rhistory
+.RData
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
 ```

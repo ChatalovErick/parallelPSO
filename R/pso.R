@@ -83,8 +83,8 @@
 #' print(result_seq$value)
 #' }
 #'
-#' @importFrom foreach %dopar% foreach
-#' @importFrom doParallel registerDoParallel getDoParWorkers
+#' @importFrom foreach %dopar% foreach getDoParWorkers
+#' @importFrom doParallel registerDoParallel
 #' @importFrom parallel stopCluster makeCluster detectCores clusterExport
 #' @export
 pso <- function(fitness_function, number_parameters, number_of_partiples, max_number_iterations,
