@@ -1,10 +1,17 @@
 Package: parallelPSO
 Type: Package
-Title: doParallel Particle Swarm Optimizaion
+Title: Parallel Particle Swarm Optimization
 Version: 0.1.0
 Author: Erick Chatalov
-Maintainer: Erick Chaatalov <chataloverick@gmail.com>
-Description: Parallel processing for the PSO
-License: What license is it under?
+Maintainer: Erick Chatalov <chataloverick@gmail.com>
+Description: Particle Swarm Optimization (PSO) algorithm with support for parallel
+    processing using doParallel. Users can easily define their own objective
+    function depending on the problem at hand. PSO can be run sequentially or
+    in parallel, making it suitable for computationally intensive fitness
+    functions and long simulations.
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
+Imports: foreach, doParallel
+Suggests: testthat
+RoxygenNote: 7.2.3

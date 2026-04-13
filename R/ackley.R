@@ -1,39 +1,35 @@
-ackley <- function(xx, a=20, b=0.2, c=2*pi)
-{
-  ##########################################################################
-  #
-  # ACKLEY FUNCTION
-  #
-  # Authors: Sonja Surjanovic, Simon Fraser University
-  #          Derek Bingham, Simon Fraser University
-  # Questions/Comments: Please email Derek Bingham at dbingham@stat.sfu.ca.
-  #
-  # Copyright 2013. Derek Bingham, Simon Fraser University.
-  #
-  # THERE IS NO WARRANTY, EXPRESS OR IMPLIED. WE DO NOT ASSUME ANY LIABILITY
-  # FOR THE USE OF THIS SOFTWARE.  If software is modified to produce
-  # derivative works, such modified software should be clearly marked.
-  # Additionally, this program is free software; you can redistribute it
-  # and/or modify it under the terms of the GNU General Public License as
-  # published by the Free Software Foundation; version 2.0 of the License.
-  # Accordingly, this program is distributed in the hope that it will be
-  # useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-  # of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-  # General Public License for more details.
-  #
-  # For function details and reference information, see:
-  # http://swww.sfu.ca/~ssurjano/
-  #
-  ##########################################################################
-  #
-  # INPUTS:
-  #
-  # xx = c(x1, x2, ..., xd)
-  # a = constant (optional), with default value 20
-  # b = constant (optional), with default value 0.2
-  # c = constant (optional), with default value 2*pi
-  #
-  ##########################################################################
+#' Ackley Function
+#'
+#' The Ackley function is a non-convex function used for testing optimization algorithms.
+#' It has many local minima, making it challenging for optimization algorithms.
+#' The global minimum is at x = (0, 0, ..., 0) with f(x) = 0.
+#'
+#' @param xx Numeric vector of parameters to evaluate.
+#' @param a Constant parameter (default: 20).
+#' @param b Constant parameter (default: 0.2).
+#' @param c Constant parameter (default: 2*pi).
+#'
+#' @return The value of the Ackley function at the given point.
+#'
+#' @details
+#' The Ackley function is defined as:
+#' f(x) = -a * exp(-b * sqrt(sum(x^2) / d)) - exp(sum(cos(c * x)) / d) + a + exp(1)
+#' where d is the dimension of x.
+#'
+#' @references
+#' Surjanovic, S., & Bingham, D. (2013). Virtual Library of Simulation Experiments:
+#' Test Functions and Datasets. Simon Fraser University.
+#' http://www.sfu.ca/~ssurjano/ackley.html
+#'
+#' @examples
+#' # Evaluate Ackley function at origin (should be 0)
+#' ackley(rep(0, 5))
+#'
+#' # Evaluate at random point
+#' ackley(runif(5, -5, 5))
+#'
+#' @export
+ackley <- function(xx, a = 20, b = 0.2, c = 2 * pi) {
 
   d <- length(xx)
 
