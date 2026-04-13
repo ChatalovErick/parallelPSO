@@ -24,14 +24,6 @@ library(devtools)
 remotes::install_github("ChatalovErick/parallelPSO")
 ```
 
-### Manual Installation:
-
-```r
-# Clone or download the repository
-# Then install from local directory
-install.packages(".", repos = NULL, type = "source")
-```
-
 ## Dependencies
 
 The package requires the following packages:
