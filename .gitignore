@@ -1,22 +1,10 @@
 ```
-# R build artifacts
-*.Rd
-R/sysdata.rda
-R/RcppExports.R
-src/*.so
-src/*.dll
-src/RcppExports.cpp
-
-# R build directory
-.Rbuildignore
-
-# Dependencies
-R/library/
-
-# Logs and temp files
-*.log
-*.tmp
-
-# Environment
-.Rprofile
+# R-specific ignores
+.Rproj.user/
+.Rhistory
+.RData
+*.RData
+*.rds
+*.Rds
+doc/
 ```

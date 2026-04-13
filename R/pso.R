@@ -84,7 +84,8 @@
 #' }
 #'
 #' @importFrom foreach %dopar% foreach
-#' @importFrom doParallel registerDoParallel stopCluster
+#' @importFrom doParallel registerDoParallel
+#' @importFrom parallel stopCluster makeCluster detectCores clusterExport getDoParWorkers
 #' @export
 pso <- function(fitness_function, number_parameters, number_of_partiples, max_number_iterations,
                 W.1 = 0.9, W.2 = 0.4, C.1i = .5+log(2), C.1f = .5+log(2),
@@ -322,7 +323,7 @@ pso <- function(fitness_function, number_parameters, number_of_partiples, max_nu
   
   # Stop parallel cluster if created
   if (cluster_created) {
-    doParallel::stopCluster(cl)
+    parallel::stopCluster(cl)
     parallel::stopImplicitCluster()
   }
   
